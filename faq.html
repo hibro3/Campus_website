@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,9 +8,11 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
+
 <body>
     <div class="bg-gradient"></div>
     <div class="stars-container">
@@ -34,17 +37,15 @@
                 <span class="logo-text">Campus</span>
             </div>
             <ul class="nav-links">
-                <li><a href="index.html#features">Features</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="faq.html" class="active-link">FAQ</a></li>
-                <li><a href="support.html">Support</a></li>
-                <li class="nav-cta-item">
-                    <a href="download.html" class="nav-star-border">
-                        <span class="btn-inner">Download</span>
-                    </a>
-                </li>
+                <li><a href="index.html#features" data-i18n="nav_features">Features</a></li>
+                <li><a href="about.html" data-i18n="nav_about">About</a></li>
+                <li><a href="faq.html" class="active-link" data-i18n="nav_faq">FAQ</a></li>
+                <li><a href="support.html" data-i18n="nav_support">Support</a></li>
             </ul>
             <div class="nav-actions">
+                <a href="download.html" class="nav-star-border">
+                    <span class="btn-inner" data-i18n="nav_download">Download</span>
+                </a>
                 <button class="theme-toggle" id="theme-toggle" title="Toggle Theme">
                     <i data-lucide="moon" id="theme-icon"></i>
                 </button>
@@ -65,7 +66,9 @@
                     <i data-lucide="chevron-down"></i>
                 </button>
                 <div class="accordion-content">
-                    You can easily check submission deadlines by opening your class group and navigating to the 'Assignments' tab. All pending tasks will be listed with their respective due dates and high-priority alerts.
+                    You can easily check submission deadlines by opening your class group and navigating to the
+                    'Assignments' tab. All pending tasks will be listed with their respective due dates and
+                    high-priority alerts.
                 </div>
             </div>
 
@@ -75,7 +78,8 @@
                     <i data-lucide="chevron-down"></i>
                 </button>
                 <div class="accordion-content">
-                    Campus allows for both group and direct messaging. You can chat with your entire class in the 'Groups' tab, or find a specific classmate and start a 'Direct' message for private discussions.
+                    Campus allows for both group and direct messaging. You can chat with your entire class in the
+                    'Groups' tab, or find a specific classmate and start a 'Direct' message for private discussions.
                 </div>
             </div>
 
@@ -85,7 +89,8 @@
                     <i data-lucide="chevron-down"></i>
                 </button>
                 <div class="accordion-content">
-                    Yes. All direct messages are end-to-end encrypted, and class group chats are restricted only to verified students and teachers assigned to that specific subject.
+                    Yes. All direct messages are end-to-end encrypted, and class group chats are restricted only to
+                    verified students and teachers assigned to that specific subject.
                 </div>
             </div>
 
@@ -95,7 +100,8 @@
                     <i data-lucide="chevron-down"></i>
                 </button>
                 <div class="accordion-content">
-                    If you encounter any issues, you can report them directly through the 'Feedback' button in the app’s sidebar, or by selecting 'Report a Bug' from our support portal.
+                    If you encounter any issues, you can report them directly through the 'Feedback' button in the app’s
+                    sidebar, or by selecting 'Report a Bug' from our support portal.
                 </div>
             </div>
 
@@ -105,7 +111,8 @@
                     <i data-lucide="chevron-down"></i>
                 </button>
                 <div class="accordion-content">
-                    For technical support, you can email us at support@campuschat.app. For questions regarding your classes or assignments, we recommend messaging your teacher directly through the app.
+                    For technical support, you can email us at support@campuschat.app. For questions regarding your
+                    classes or assignments, we recommend messaging your teacher directly through the app.
                 </div>
             </div>
         </div>
@@ -162,4 +169,5 @@
     <script src="script.js"></script>
     <script>lucide.createIcons();</script>
 </body>
+
 </html>

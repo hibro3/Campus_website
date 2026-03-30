@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,9 +8,11 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
+
 <body>
     <div class="bg-gradient"></div>
     <div class="stars-container">
@@ -25,27 +28,23 @@
     <header id="site-header">
         <nav class="container">
             <div class="logo">
-                <a href="index.html" style="text-decoration:none; display:flex; align-items:center; gap:0.75rem; color:inherit;">
+                <a href="index.html"
+                    style="text-decoration:none; display:flex; align-items:center; gap:0.75rem; color:inherit;">
                     <i data-lucide="graduation-cap" class="logo-icon"></i>
                     <span class="logo-text">Campus</span>
                 </a>
             </div>
             <ul class="nav-links">
-                <li><a href="index.html#features">Features</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="faq.html">FAQ</a></li>
-                <li><a href="support.html">Support</a></li>
+                <li><a href="index.html#features" data-i18n="nav_features">Features</a></li>
+                <li><a href="about.html" data-i18n="nav_about">About</a></li>
+                <li><a href="faq.html" data-i18n="nav_faq">FAQ</a></li>
+                <li><a href="support.html" data-i18n="nav_support">Support</a></li>
                 <li class="nav-cta-item active-link">
                     <a href="download.html" class="nav-star-border">
-                        <span class="btn-inner">Download</span>
+                        <span class="btn-inner" data-i18n="nav_download">Download</span>
                     </a>
                 </li>
             </ul>
-            <div class="nav-actions">
-                <button class="theme-toggle" id="theme-toggle" title="Toggle Theme">
-                    <i data-lucide="moon" id="theme-icon"></i>
-                </button>
-            </div>
         </nav>
     </header>
 
@@ -61,7 +60,8 @@
                 <h2>Android</h2>
                 <p>Available for Android 7.0 and up.</p>
                 <div class="download-status">Available Now</div>
-                <a href="https://play.google.com/store/apps/details?id=com.adityakumawatanil.campus&hl=en_IN" target="_blank" class="btn-star-border full-width">
+                <a href="https://play.google.com/store/apps/details?id=com.adityakumawatanil.campus&hl=en_IN"
+                    target="_blank" class="btn-star-border full-width">
                     <span class="btn-inner">
                         <i data-lucide="play"></i>
                         Get on Google Play
@@ -74,7 +74,8 @@
                 <h2>iOS</h2>
                 <p>Compatible with iOS 14.0 or newer.</p>
                 <div class="download-status">Available Now</div>
-                <a href="https://apps.apple.com/bj/app/campus-chat/id6757256665" target="_blank" class="btn-star-border full-width">
+                <a href="https://apps.apple.com/bj/app/campus-chat/id6757256665" target="_blank"
+                    class="btn-star-border full-width">
                     <span class="btn-inner">
                         <i data-lucide="apple"></i>
                         Download on App Store
@@ -128,6 +129,7 @@
             gap: 2rem;
             margin-bottom: 100px;
         }
+
         .download-card {
             background: var(--bg-card);
             padding: 3.5rem;
@@ -138,6 +140,7 @@
             flex-direction: column;
             align-items: center;
         }
+
         .platform-icon {
             width: 80px;
             height: 80px;
@@ -149,7 +152,12 @@
             justify-content: center;
             margin-bottom: 2rem;
         }
-        .platform-icon i { width: 40px; height: 40px; }
+
+        .platform-icon i {
+            width: 40px;
+            height: 40px;
+        }
+
         .download-status {
             padding: 0.5rem 1rem;
             background: rgba(34, 197, 94, 0.1);
@@ -159,26 +167,74 @@
             font-size: 0.75rem;
             margin: 1.5rem 0 2rem;
         }
-        .coming-soon { background: rgba(148, 163, 184, 0.1); color: var(--text-muted); }
-        .full-width { width: 100%; justify-content: center; }
-        .disabled { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
-        .requirements { margin-top: 100px; text-align: center; }
+
+        .coming-soon {
+            background: rgba(148, 163, 184, 0.1);
+            color: var(--text-muted);
+        }
+
+        .full-width {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .requirements {
+            margin-top: 100px;
+            text-align: center;
+        }
+
         .req-grid {
             display: flex;
             justify-content: center;
             gap: 6rem;
             margin-top: 4rem;
         }
-        .req-item { text-align: left; }
-        .req-item h4 { margin-bottom: 1rem; color: var(--primary-blue); }
-        .req-item ul { list-style: none; color: var(--text-muted); }
-        .req-item li { margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
-        .req-item li::before { content: "•"; color: var(--primary-blue); font-weight: 900; }
-        .active-link { color: var(--primary-blue) !important; }
+
+        .req-item {
+            text-align: left;
+        }
+
+        .req-item h4 {
+            margin-bottom: 1rem;
+            color: var(--primary-blue);
+        }
+
+        .req-item ul {
+            list-style: none;
+            color: var(--text-muted);
+        }
+
+        .req-item li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .req-item li::before {
+            content: "•";
+            color: var(--primary-blue);
+            font-weight: 900;
+        }
+
+        .active-link {
+            color: var(--primary-blue) !important;
+        }
 
         @media (max-width: 768px) {
-            .req-grid { flex-direction: column; gap: 3rem; align-items: center; }
+            .req-grid {
+                flex-direction: column;
+                gap: 3rem;
+                align-items: center;
+            }
         }
     </style>
 </body>
+
 </html>

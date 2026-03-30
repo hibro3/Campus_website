@@ -1,159 +1,112 @@
+// ════════════════════════════════════════════════
+//  CAMPUS WEBSITE — Main Script
+// ════════════════════════════════════════════════
+
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Scroll-reveal animations
+
+    // ── 1. Scroll-reveal animations ──────────────────────────────
     const revealElements = document.querySelectorAll('.reveal');
-    
-    const revealOnScroll = (entries, observer) => {
+    const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-                // Optional: Unobserve after revealing
-                // observer.unobserve(entry.target);
-            }
+            if (entry.isIntersecting) entry.target.classList.add('active');
         });
-    };
+    }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+    revealElements.forEach(el => revealObserver.observe(el));
 
-    const revealObserver = new IntersectionObserver(revealOnScroll, {
-        threshold: 0.15,
-        rootMargin: '0px 0px -50px 0px'
-    });
+    // ── 2. Header Scroll Effect ───────────────────────────────────
+    const siteHeader = document.getElementById('site-header');
+    if (siteHeader) {
+        window.addEventListener('scroll', () => {
+            siteHeader.style.boxShadow = window.scrollY > 50
+                ? '0 10px 30px rgba(0,0,0,0.15)'
+                : 'none';
+        });
+    }
 
-    revealElements.forEach(el => {
-        revealObserver.observe(el);
-    });
-
-
-    // 3. Header Scroll Effect
-    const header = document.getElementById('site-header');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            header.style.padding = '0.5rem 0';
-            header.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.1)';
-        } else {
-            header.style.padding = '1.5rem 0';
-            header.style.boxShadow = 'none';
-        }
-    });
-
-    // 4. Smooth Anchor Scrolling (optional enhancement)
+    // ── 3. Smooth Anchor Scrolling ────────────────────────────────
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
+        anchor.addEventListener('click', function(e) {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }
+            if (target) target.scrollIntoView({ behavior: 'smooth' });
         });
     });
 
-    // 5. Click Spark Animation
-    function createSpark(x, y) {
-        const sparkCount = 8;
-        const colors = ['#2563eb', '#5227FF', '#FF9FFC']; // Primary and logo colors
-        
-        for (let i = 0; i < sparkCount; i++) {
+    // ── 4. Click Spark Animation ──────────────────────────────────
+    window.addEventListener('mousedown', e => {
+        const colors = ['#2563eb', '#5227FF', '#FF9FFC'];
+        for (let i = 0; i < 8; i++) {
             const spark = document.createElement('div');
             spark.className = 'spark-particle';
             document.body.appendChild(spark);
-            
-            const angle = (i / sparkCount) * 360;
+            const angle    = (i / 8) * 360;
             const distance = 40 + Math.random() * 20;
-            const color = colors[Math.floor(Math.random() * colors.length)];
-            
-            spark.style.backgroundColor = color;
-            spark.style.left = `${x}px`;
-            spark.style.top = `${y}px`;
-            spark.style.transform = `translate(-50%, -50%) rotate(${angle}deg) translateY(0) scaleY(1)`;
-            
-            // Force layout reflow
+            spark.style.backgroundColor = colors[i % colors.length];
+            spark.style.left      = `${e.pageX}px`;
+            spark.style.top       = `${e.pageY}px`;
+            spark.style.transform = `translate(-50%,-50%) rotate(${angle}deg) translateY(0) scaleY(1)`;
             void spark.offsetWidth;
-            
-            spark.style.transform = `translate(-50%, -50%) rotate(${angle}deg) translateY(-${distance}px) scaleY(0)`;
-            spark.style.opacity = '0';
-            
+            spark.style.transform = `translate(-50%,-50%) rotate(${angle}deg) translateY(-${distance}px) scaleY(0)`;
+            spark.style.opacity   = '0';
             setTimeout(() => spark.remove(), 600);
         }
-    }
-
-    window.addEventListener('mousedown', (e) => {
-        createSpark(e.pageX, e.pageY);
     });
 
-    // Initial icon creation
-    if (window.lucide) {
-        lucide.createIcons();
-    }
+    // ── 5. Lucide Icons ───────────────────────────────────────────
+    if (window.lucide) lucide.createIcons();
 
-    // 6. Theme Switching logic
+    // ── 6. Theme Switching ────────────────────────────────────────
     const themeToggle = document.getElementById('theme-toggle');
-    const themeIcon = document.getElementById('theme-icon');
-    const body = document.body;
+    const themeIcon   = document.getElementById('theme-icon');
+    const body        = document.body;
 
     function setTheme(isLight) {
-        if (isLight) {
-            body.classList.add('light-mode');
-            if (themeIcon) themeIcon.setAttribute('data-lucide', 'sun');
-            localStorage.setItem('theme', 'light');
-        } else {
-            body.classList.remove('light-mode');
-            if (themeIcon) themeIcon.setAttribute('data-lucide', 'moon');
-            localStorage.setItem('theme', 'dark');
-        }
-        if (window.lucide) {
-            lucide.createIcons();
-        }
+        body.classList.toggle('light-mode', isLight);
+        if (themeIcon) themeIcon.setAttribute('data-lucide', isLight ? 'sun' : 'moon');
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        if (window.lucide) lucide.createIcons();
     }
 
     if (themeToggle) {
-        // Check saved theme
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'light') {
-            setTheme(true);
-        }
-
+        if (localStorage.getItem('theme') === 'light') setTheme(true);
         themeToggle.addEventListener('click', () => {
             setTheme(!body.classList.contains('light-mode'));
         });
     }
 
-    // 7. Dynamic Leaves & Pollen
+    // ── 7. Dynamic Leaves & Pollen ────────────────────────────────
     const leavesContainer = document.getElementById('leaves-container');
     if (leavesContainer) {
-        // Generate Pollen
         for (let i = 0; i < 40; i++) {
-            const pollen = document.createElement('div');
-            pollen.className = 'pollen';
-            pollen.style.left = `${Math.random() * 100}%`;
-            pollen.style.top = `${Math.random() * 100}%`;
-            pollen.style.animationDelay = `${Math.random() * 10}s`;
-            pollen.style.animationDuration = `${10 + Math.random() * 10}s`;
-            leavesContainer.appendChild(pollen);
+            const p = document.createElement('div');
+            p.className = 'pollen';
+            p.style.left            = `${Math.random() * 100}%`;
+            p.style.top             = `${Math.random() * 100}%`;
+            p.style.animationDelay  = `${Math.random() * 10}s`;
+            p.style.animationDuration = `${10 + Math.random() * 10}s`;
+            leavesContainer.appendChild(p);
         }
-
-        // Generate Leaves
-        const leafImages = ['assets/leaf1.png', 'assets/leaf2.png'];
+        const leafImages = ['assets/light-bg-1.jpg', 'assets/light-bg-2.jpg', 'assets/light-bg-3.jpg'];
         for (let i = 0; i < 15; i++) {
-            const leaf = document.createElement('div');
-            leaf.className = 'leaf';
-            leaf.style.left = `${Math.random() * 100}%`;
-            leaf.style.top = `${Math.random() * 100}%`;
-            leaf.style.backgroundImage = `url(${leafImages[Math.floor(Math.random() * leafImages.length)]})`;
-            leaf.style.animationDelay = `${Math.random() * 5}s`;
-            leaf.style.animationDuration = `${8 + Math.random() * 7}s`;
-            leaf.style.transform = `rotate(${Math.random() * 360}deg)`;
-            leavesContainer.appendChild(leaf);
+            const l = document.createElement('div');
+            l.className = 'leaf';
+            l.style.left            = `${Math.random() * 100}%`;
+            l.style.top             = `${Math.random() * 100}%`;
+            l.style.backgroundImage = `url(${leafImages[i % leafImages.length]})`;
+            l.style.animationDelay  = `${Math.random() * 5}s`;
+            l.style.animationDuration = `${8 + Math.random() * 7}s`;
+            l.style.transform       = `rotate(${Math.random() * 360}deg)`;
+            leavesContainer.appendChild(l);
         }
     }
+
 });
 
-// FAQ Accordion
+// ── FAQ Accordion ─────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-    const accordionHeaders = document.querySelectorAll('.accordion-header');
-    accordionHeaders.forEach(header => {
-        header.addEventListener('click', () => {
-            const item = header.parentElement;
-            item.classList.toggle('active');
+    document.querySelectorAll('.accordion-header').forEach(hdr => {
+        hdr.addEventListener('click', () => {
+            hdr.parentElement.classList.toggle('active');
         });
     });
 });
